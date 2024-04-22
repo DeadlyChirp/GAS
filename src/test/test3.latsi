@@ -1,0 +1,7 @@
+5 REM "This program tests loops using conditional jumps."
+10 I = 0
+20 PRINT "Current value of I:", I
+30 I = I + 1
+40 IF I < 5 THEN GOTO 20
+50 PRINT "Loop complete."
+60 END

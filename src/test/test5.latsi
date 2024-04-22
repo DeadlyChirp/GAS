@@ -1,0 +1,7 @@
+5 REM "Testing complex expressions and multiple statements per line."
+10 X = 1, Y = 2, Z = 3
+20 PRINT X, Y, Z
+30 X = X + Y * Z
+40 PRINT "New value of X:", X
+50 IF X > 10 THEN PRINT "X is now greater than 10"
+60 END

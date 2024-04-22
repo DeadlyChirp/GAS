@@ -1,0 +1,6 @@
+5 REM "This program tests basic arithmetic and printing."
+10 PRINT 3 + 5
+20 PRINT 10 - 2
+30 PRINT 15 * 2
+40 PRINT 20 / 4
+50 END

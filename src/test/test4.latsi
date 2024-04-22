@@ -1,0 +1,5 @@
+5 REM "This program tests user input and error handling."
+10 INPUT X
+20 PRINT "You entered:", X
+30 Y = X / 0  REM "This line should cause a divide by zero error if not handled."
+40 END

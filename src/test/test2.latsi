@@ -1,0 +1,7 @@
+5 REM "This program tests variable assignments and conditional logic."
+10 I = 10
+20 J = 20
+30 IF I < J THEN PRINT "I is less than J"
+40 IF J > I THEN PRINT "J is greater than I"
+50 PRINT "End of conditions"
+60 END
