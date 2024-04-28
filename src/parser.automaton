@@ -1,0 +1,546 @@
+State 0:
+## Known stack suffix:
+##
+## LR(1) items:
+program' -> . program [ # ]
+## Transitions:
+-- On VAVERS shift to state 1
+-- On REM shift to state 12
+-- On NL shift to state 14
+-- On INPUT shift to state 15
+-- On IMPRIME shift to state 20
+-- On IF shift to state 25
+-- On IDENTIFIER shift to state 32
+-- On EOF shift to state 40
+-- On END shift to state 35
+-- On stmt_list shift to state 41
+-- On stmt shift to state 43
+-- On program shift to state 45
+## Reductions:
+
+State 1:
+## Known stack suffix:
+## VAVERS
+## LR(1) items:
+stmt -> VAVERS . expr [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On NUMBER shift to state 2
+-- On LPAREN shift to state 3
+-- On IDENTIFIER shift to state 4
+-- On expr shift to state 11
+## Reductions:
+
+State 2:
+## Known stack suffix:
+## NUMBER
+## LR(1) items:
+expr -> NUMBER . [ VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS ]
+## Transitions:
+## Reductions:
+-- On VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS
+--   reduce production expr -> NUMBER
+
+State 3:
+## Known stack suffix:
+## LPAREN
+## LR(1) items:
+expr -> LPAREN . expr RPAREN [ VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS ]
+## Transitions:
+-- On NUMBER shift to state 2
+-- On LPAREN shift to state 3
+-- On IDENTIFIER shift to state 4
+-- On expr shift to state 5
+## Reductions:
+
+State 4:
+## Known stack suffix:
+## IDENTIFIER
+## LR(1) items:
+expr -> IDENTIFIER . [ VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS ]
+## Transitions:
+## Reductions:
+-- On VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS
+--   reduce production expr -> IDENTIFIER
+
+State 5:
+## Known stack suffix:
+## LPAREN expr
+## LR(1) items:
+expr -> expr . PLUS expr [ RPAREN PLUS MINUS ]
+expr -> expr . MINUS expr [ RPAREN PLUS MINUS ]
+expr -> LPAREN expr . RPAREN [ VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS ]
+## Transitions:
+-- On RPAREN shift to state 6
+-- On PLUS shift to state 7
+-- On MINUS shift to state 9
+## Reductions:
+
+State 6:
+## Known stack suffix:
+## LPAREN expr RPAREN
+## LR(1) items:
+expr -> LPAREN expr RPAREN . [ VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS ]
+## Transitions:
+## Reductions:
+-- On VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS
+--   reduce production expr -> LPAREN expr RPAREN
+
+State 7:
+## Known stack suffix:
+## expr PLUS
+## LR(1) items:
+expr -> expr PLUS . expr [ VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS ]
+## Transitions:
+-- On NUMBER shift to state 2
+-- On LPAREN shift to state 3
+-- On IDENTIFIER shift to state 4
+-- On expr shift to state 8
+## Reductions:
+
+State 8:
+## Known stack suffix:
+## expr PLUS expr
+## LR(1) items:
+expr -> expr . PLUS expr [ VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS ]
+expr -> expr PLUS expr . [ VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS ]
+expr -> expr . MINUS expr [ VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS ]
+## Transitions:
+## Reductions:
+-- On VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS
+--   reduce production expr -> expr PLUS expr
+
+State 9:
+## Known stack suffix:
+## expr MINUS
+## LR(1) items:
+expr -> expr MINUS . expr [ VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS ]
+## Transitions:
+-- On NUMBER shift to state 2
+-- On LPAREN shift to state 3
+-- On IDENTIFIER shift to state 4
+-- On expr shift to state 10
+## Reductions:
+
+State 10:
+## Known stack suffix:
+## expr MINUS expr
+## LR(1) items:
+expr -> expr . PLUS expr [ VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS ]
+expr -> expr . MINUS expr [ VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS ]
+expr -> expr MINUS expr . [ VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS ]
+## Transitions:
+## Reductions:
+-- On VAVERS RPAREN REM PLUS NL MINUS LT INPUT IMPRIME IF IDENTIFIER GT EOF END ELSE COMMA ALORS
+--   reduce production expr -> expr MINUS expr
+
+State 11:
+## Known stack suffix:
+## VAVERS expr
+## LR(1) items:
+expr -> expr . PLUS expr [ VAVERS REM PLUS NL MINUS INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+expr -> expr . MINUS expr [ VAVERS REM PLUS NL MINUS INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+stmt -> VAVERS expr . [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On PLUS shift to state 7
+-- On MINUS shift to state 9
+## Reductions:
+-- On VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE
+--   reduce production stmt -> VAVERS expr
+
+State 12:
+## Known stack suffix:
+## REM
+## LR(1) items:
+stmt -> REM . STRING [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On STRING shift to state 13
+## Reductions:
+
+State 13:
+## Known stack suffix:
+## REM STRING
+## LR(1) items:
+stmt -> REM STRING . [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+## Reductions:
+-- On VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE
+--   reduce production stmt -> REM STRING
+
+State 14:
+## Known stack suffix:
+## NL
+## LR(1) items:
+stmt -> NL . [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+## Reductions:
+-- On VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE
+--   reduce production stmt -> NL
+
+State 15:
+## Known stack suffix:
+## INPUT
+## LR(1) items:
+stmt -> INPUT . var_list [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On IDENTIFIER shift to state 16
+-- On var_list shift to state 19
+## Reductions:
+
+State 16:
+## Known stack suffix:
+## IDENTIFIER
+## LR(1) items:
+var_list -> IDENTIFIER . [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+var_list -> IDENTIFIER . COMMA var_list [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On COMMA shift to state 17
+## Reductions:
+-- On VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE
+--   reduce production var_list -> IDENTIFIER
+
+State 17:
+## Known stack suffix:
+## IDENTIFIER COMMA
+## LR(1) items:
+var_list -> IDENTIFIER COMMA . var_list [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On IDENTIFIER shift to state 16
+-- On var_list shift to state 18
+## Reductions:
+
+State 18:
+## Known stack suffix:
+## IDENTIFIER COMMA var_list
+## LR(1) items:
+var_list -> IDENTIFIER COMMA var_list . [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+## Reductions:
+-- On VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE
+--   reduce production var_list -> IDENTIFIER COMMA var_list
+
+State 19:
+## Known stack suffix:
+## INPUT var_list
+## LR(1) items:
+stmt -> INPUT var_list . [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+## Reductions:
+-- On VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE
+--   reduce production stmt -> INPUT var_list
+
+State 20:
+## Known stack suffix:
+## IMPRIME
+## LR(1) items:
+stmt -> IMPRIME . expr_list [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On NUMBER shift to state 2
+-- On LPAREN shift to state 3
+-- On IDENTIFIER shift to state 4
+-- On expr_list shift to state 21
+-- On expr shift to state 22
+## Reductions:
+
+State 21:
+## Known stack suffix:
+## IMPRIME expr_list
+## LR(1) items:
+stmt -> IMPRIME expr_list . [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+## Reductions:
+-- On VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE
+--   reduce production stmt -> IMPRIME expr_list
+
+State 22:
+## Known stack suffix:
+## expr
+## LR(1) items:
+expr -> expr . PLUS expr [ VAVERS REM PLUS NL MINUS INPUT IMPRIME IF IDENTIFIER EOF END ELSE COMMA ]
+expr -> expr . MINUS expr [ VAVERS REM PLUS NL MINUS INPUT IMPRIME IF IDENTIFIER EOF END ELSE COMMA ]
+expr_list -> expr . [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+expr_list -> expr . COMMA expr_list [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On PLUS shift to state 7
+-- On MINUS shift to state 9
+-- On COMMA shift to state 23
+## Reductions:
+-- On VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE
+--   reduce production expr_list -> expr
+
+State 23:
+## Known stack suffix:
+## expr COMMA
+## LR(1) items:
+expr_list -> expr COMMA . expr_list [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On NUMBER shift to state 2
+-- On LPAREN shift to state 3
+-- On IDENTIFIER shift to state 4
+-- On expr_list shift to state 24
+-- On expr shift to state 22
+## Reductions:
+
+State 24:
+## Known stack suffix:
+## expr COMMA expr_list
+## LR(1) items:
+expr_list -> expr COMMA expr_list . [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+## Reductions:
+-- On VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE
+--   reduce production expr_list -> expr COMMA expr_list
+
+State 25:
+## Known stack suffix:
+## IF
+## LR(1) items:
+stmt -> IF . expr relop expr ALORS stmt opt_else [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On NUMBER shift to state 2
+-- On LPAREN shift to state 3
+-- On IDENTIFIER shift to state 4
+-- On expr shift to state 26
+## Reductions:
+
+State 26:
+## Known stack suffix:
+## IF expr
+## LR(1) items:
+expr -> expr . PLUS expr [ PLUS MINUS LT GT ]
+expr -> expr . MINUS expr [ PLUS MINUS LT GT ]
+stmt -> IF expr . relop expr ALORS stmt opt_else [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On PLUS shift to state 7
+-- On MINUS shift to state 9
+-- On LT shift to state 27
+-- On GT shift to state 28
+-- On relop shift to state 29
+## Reductions:
+
+State 27:
+## Known stack suffix:
+## LT
+## LR(1) items:
+relop -> LT . [ NUMBER LPAREN IDENTIFIER ]
+## Transitions:
+## Reductions:
+-- On NUMBER LPAREN IDENTIFIER
+--   reduce production relop -> LT
+
+State 28:
+## Known stack suffix:
+## GT
+## LR(1) items:
+relop -> GT . [ NUMBER LPAREN IDENTIFIER ]
+## Transitions:
+## Reductions:
+-- On NUMBER LPAREN IDENTIFIER
+--   reduce production relop -> GT
+
+State 29:
+## Known stack suffix:
+## IF expr relop
+## LR(1) items:
+stmt -> IF expr relop . expr ALORS stmt opt_else [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On NUMBER shift to state 2
+-- On LPAREN shift to state 3
+-- On IDENTIFIER shift to state 4
+-- On expr shift to state 30
+## Reductions:
+
+State 30:
+## Known stack suffix:
+## IF expr relop expr
+## LR(1) items:
+expr -> expr . PLUS expr [ PLUS MINUS ALORS ]
+expr -> expr . MINUS expr [ PLUS MINUS ALORS ]
+stmt -> IF expr relop expr . ALORS stmt opt_else [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On PLUS shift to state 7
+-- On MINUS shift to state 9
+-- On ALORS shift to state 31
+## Reductions:
+
+State 31:
+## Known stack suffix:
+## IF expr relop expr ALORS
+## LR(1) items:
+stmt -> IF expr relop expr ALORS . stmt opt_else [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On VAVERS shift to state 1
+-- On REM shift to state 12
+-- On NL shift to state 14
+-- On INPUT shift to state 15
+-- On IMPRIME shift to state 20
+-- On IF shift to state 25
+-- On IDENTIFIER shift to state 32
+-- On END shift to state 35
+-- On stmt shift to state 36
+## Reductions:
+
+State 32:
+## Known stack suffix:
+## IDENTIFIER
+## LR(1) items:
+stmt -> IDENTIFIER . EQUALS expr [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On EQUALS shift to state 33
+## Reductions:
+
+State 33:
+## Known stack suffix:
+## IDENTIFIER EQUALS
+## LR(1) items:
+stmt -> IDENTIFIER EQUALS . expr [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On NUMBER shift to state 2
+-- On LPAREN shift to state 3
+-- On IDENTIFIER shift to state 4
+-- On expr shift to state 34
+## Reductions:
+
+State 34:
+## Known stack suffix:
+## IDENTIFIER EQUALS expr
+## LR(1) items:
+expr -> expr . PLUS expr [ VAVERS REM PLUS NL MINUS INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+expr -> expr . MINUS expr [ VAVERS REM PLUS NL MINUS INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+stmt -> IDENTIFIER EQUALS expr . [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On PLUS shift to state 7
+-- On MINUS shift to state 9
+## Reductions:
+-- On VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE
+--   reduce production stmt -> IDENTIFIER EQUALS expr
+
+State 35:
+## Known stack suffix:
+## END
+## LR(1) items:
+stmt -> END . [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+## Reductions:
+-- On VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE
+--   reduce production stmt -> END
+
+State 36:
+## Known stack suffix:
+## IF expr relop expr ALORS stmt
+## LR(1) items:
+stmt -> IF expr relop expr ALORS stmt . opt_else [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On ELSE shift to state 37
+-- On opt_else shift to state 39
+## Reductions:
+-- On VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE
+--   reduce production opt_else ->
+** Conflict on ELSE
+
+State 37:
+## Known stack suffix:
+## ELSE
+## LR(1) items:
+opt_else -> ELSE . stmt [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+-- On VAVERS shift to state 1
+-- On REM shift to state 12
+-- On NL shift to state 14
+-- On INPUT shift to state 15
+-- On IMPRIME shift to state 20
+-- On IF shift to state 25
+-- On IDENTIFIER shift to state 32
+-- On END shift to state 35
+-- On stmt shift to state 38
+## Reductions:
+
+State 38:
+## Known stack suffix:
+## ELSE stmt
+## LR(1) items:
+opt_else -> ELSE stmt . [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+## Reductions:
+-- On VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE
+--   reduce production opt_else -> ELSE stmt
+
+State 39:
+## Known stack suffix:
+## IF expr relop expr ALORS stmt opt_else
+## LR(1) items:
+stmt -> IF expr relop expr ALORS stmt opt_else . [ VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE ]
+## Transitions:
+## Reductions:
+-- On VAVERS REM NL INPUT IMPRIME IF IDENTIFIER EOF END ELSE
+--   reduce production stmt -> IF expr relop expr ALORS stmt opt_else
+
+State 40:
+## Known stack suffix:
+## EOF
+## LR(1) items:
+program -> EOF . [ # ]
+## Transitions:
+## Reductions:
+-- On #
+--   reduce production program -> EOF
+
+State 41:
+## Known stack suffix:
+## stmt_list
+## LR(1) items:
+program -> stmt_list . EOF [ # ]
+## Transitions:
+-- On EOF shift to state 42
+## Reductions:
+
+State 42:
+## Known stack suffix:
+## stmt_list EOF
+## LR(1) items:
+program -> stmt_list EOF . [ # ]
+## Transitions:
+## Reductions:
+-- On #
+--   reduce production program -> stmt_list EOF
+
+State 43:
+## Known stack suffix:
+## stmt
+## LR(1) items:
+stmt_list -> stmt . [ EOF ]
+stmt_list -> stmt . stmt_list [ EOF ]
+## Transitions:
+-- On VAVERS shift to state 1
+-- On REM shift to state 12
+-- On NL shift to state 14
+-- On INPUT shift to state 15
+-- On IMPRIME shift to state 20
+-- On IF shift to state 25
+-- On IDENTIFIER shift to state 32
+-- On END shift to state 35
+-- On stmt_list shift to state 44
+-- On stmt shift to state 43
+## Reductions:
+-- On EOF
+--   reduce production stmt_list -> stmt
+
+State 44:
+## Known stack suffix:
+## stmt stmt_list
+## LR(1) items:
+stmt_list -> stmt stmt_list . [ EOF ]
+## Transitions:
+## Reductions:
+-- On EOF
+--   reduce production stmt_list -> stmt stmt_list
+
+State 45:
+## Known stack suffix:
+## program
+## LR(1) items:
+program' -> program . [ # ]
+## Transitions:
+## Reductions:
+-- On #
+--   accept program
+

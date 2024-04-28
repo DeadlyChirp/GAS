@@ -15,10 +15,7 @@ rule token = parse
   | "VAVERS"              { VAVERS }
   | "PRINT"               { PRINT }
   | "IF"                  { IF }
-  | "THEN"                { THEN }
-  | "GOTO"                { GOTO }
   | "INPUT"               { INPUT }
-  | "LET"                 { LET }
   | "END"                 { END }
   | "REM"                 { REM }
   | "NL"                  { NL }
@@ -28,8 +25,6 @@ rule token = parse
   | ","                   { COMMA }
   | "+"                   { PLUS }
   | "-"                   { MINUS }
-  | "*"                   { TIMES }
-  | "/"                   { DIVIDE }
   | "("                   { LPAREN }
   | ")"                   { RPAREN }
   | number                { NUMBER(int_of_string (Lexing.lexeme lexbuf)) }

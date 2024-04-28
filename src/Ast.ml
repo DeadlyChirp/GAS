@@ -16,7 +16,7 @@ type relop =
 type stmt =
   | Print of expr list
   | Assign of string * expr
-  | If of expr * relop * expr * stmt * (stmt option)
+  | If of expr * relop * expr * stmt * stmt option
   | Goto of expr
   | Input of string list
   | Remark of string
