@@ -1,12 +1,18 @@
+%{
+open Ast
+%}
+
 %token <int> NUMBER
 %token <string> STRING
-%token PRINT IF THEN GOTO INPUT LET END REM NL EQUALS GT LT COMMA PLUS MINUS TIMES DIVIDE LPAREN RPAREN IDENTIFIER EOF
+%token IMPRIME ALORS VAVERS IF THEN GOTO INPUT LET END REM NL EQUALS GT LT COMMA PLUS MINUS TIMES DIVIDE LPAREN RPAREN IDENTIFIER EOF
 
-%start <Ast.program> program
-%type <Ast.expr> expr
-%type <Ast.stmt> stmt
+%start <stmt list> program
+%type <expr> expr
+%type <stmt> stmt
+%type <stmt list> stmt_list
 
 %%
+
 program:
   | EOF                  { [] }
   | stmt_list EOF        { List.rev $1 }
@@ -16,12 +22,12 @@ stmt_list:
   | stmt stmt_list       { $1 :: $2 }
 
 stmt:
-  | PRINT expr_list      { Print($2) }
+  | IMPRIME expr_list    { Print($2) }
   | REM STRING           { Remark($2) }
-  | IF expr relop expr THEN stmt opt_else { If($2, $3, $4, $6, $7) }
-  | IDENTIFIER EQUALS expr { Assignment($1, $3) }
-  | NL                   { NewLine }
-  | GOTO expr            { Goto($2) }
+  | IF expr relop expr ALORS stmt opt_else { If($2, $3, $5, $6) }
+  | IDENTIFIER EQUALS expr { Assign($1, $3) }
+  | NL                   { Nl }
+  | VAVERS expr          { Goto($2) }
   | INPUT var_list       { Input($2) }
   | END                  { End }
 
