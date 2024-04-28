@@ -4,12 +4,17 @@ open Ast
 
 %token <int> NUMBER
 %token <string> STRING
+%token ELSE 
 %token IMPRIME ALORS VAVERS IF THEN GOTO INPUT LET END REM NL EQUALS GT LT COMMA PLUS MINUS TIMES DIVIDE LPAREN RPAREN IDENTIFIER EOF
 
-%start <stmt list> program
-%type <expr> expr
-%type <stmt> stmt
-%type <stmt list> stmt_list
+%start <Ast.stmt list> program
+%type <Ast.expr> expr
+%type <Ast.stmt> stmt
+%type <Ast.stmt list> stmt_list
+%type <Ast.expr list> expr_list
+%type <Ast.stmt option> opt_else
+%type <Ast.relop> relop
+%type <Ast.string list> var_list
 
 %%
 

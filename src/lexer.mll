@@ -4,9 +4,9 @@
 
 let digit = ['0'-'9']
 let letter = ['a'-'z' 'A'-'Z']
-let identifier = letter+ { IDENTIFIER (Lexing.lexeme lexbuf) }
-let number = digit+ { NUMBER (int_of_string (Lexing.lexeme lexbuf)) }
-let string = '"' ( [^ '"' '\n']* as s) '"' { STRING s }
+let identifier = letter+ 
+let number = digit+ 
+let string = '"' ( [^ '"' '\n']* as s) '"'
 
 rule token = parse
   | [' ' '\t' '\r' '\n']+ { token lexbuf }  (* Skip whitespace and recurse *)
@@ -32,7 +32,7 @@ rule token = parse
   | "/"                   { DIVIDE }
   | "("                   { LPAREN }
   | ")"                   { RPAREN }
-  | number
-  | string
-  | identifier
+  | number                { NUMBER(int_of_string (Lexing.lexeme lexbuf)) }
+  | string                { STRING(s) }
+  | identifier            { IDENTIFIER(Lexing.lexeme lexbuf) }
   | eof                   { EOF }
