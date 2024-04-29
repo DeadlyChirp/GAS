@@ -9,11 +9,10 @@ let number = digit+
 let string = '"' ( [^ '"' '\n']* as s) '"'
 
 rule token = parse
-  | [' ' '\t' '\r' '\n']+ { token lexbuf }  (* Skip whitespace and recurse *)
+  | [' ' '\t' '\r' '\n']+ { token lexbuf }  
   | "IMPRIME"             { IMPRIME }
   | "ALORS"               { ALORS }
   | "VAVERS"              { VAVERS }
-  | "PRINT"               { PRINT }
   | "IF"                  { IF }
   | "INPUT"               { INPUT }
   | "END"                 { END }
@@ -30,4 +29,4 @@ rule token = parse
   | number                { NUMBER(int_of_string (Lexing.lexeme lexbuf)) }
   | string                { STRING(s) }
   | identifier            { IDENTIFIER(Lexing.lexeme lexbuf) }
-  | eof                   { EOF }
+  | eof                   { EOF }  

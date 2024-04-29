@@ -2,21 +2,32 @@
 open Ast
 %}
 
-%left PLUS MINUS
-
 %token <int> NUMBER
 %token <string> STRING
-%token ELSE 
-%token IMPRIME ALORS VAVERS IF INPUT END REM NL EQUALS GT LT COMMA LPAREN RPAREN IDENTIFIER EOF
+%token <string> IDENTIFIER
+%token ELSE
+%token IMPRIME
+%token ALORS
+%token VAVERS
+%token IF
+%token INPUT
+%token END
+%token REM
+%token NL
+%token EQUALS
+%token GT
+%token LT
+%token PLUS
+%token MINUS
 
 %start <Ast.stmt list> program
 %type <Ast.expr> expr
 %type <Ast.stmt> stmt
 %type <Ast.stmt list> stmt_list
-%type <relop> relop
-%type <expr list> expr_list
-%type <stmt option> opt_else
-%type <string list> var_list
+%type <Ast.relop> relop
+%type <Ast.expr list> expr_list
+%type <Ast.stmt option> opt_else
+%type <Ast.string list> var_list
 
 %%
 program:
@@ -30,7 +41,7 @@ stmt_list:
 stmt:
   | IMPRIME expr_list    { Print($2) }
   | REM STRING           { Remark($2) }
-  | IF expr relop expr ALORS stmt opt_else { If($2, $3, $4, $5, $6) }
+  | IF expr relop expr ALORS stmt opt_else { If ($2, $3, $4, $5, $6) }
   | IDENTIFIER EQUALS expr { Assign($1, $3) }
   | NL                   { Nl }
   | VAVERS expr          { Goto($2) }
@@ -39,7 +50,7 @@ stmt:
 
 opt_else:
   | /* empty */          { None }
-  | ELSE stmt opt_else   { Some (If(Num(1), Greater, Num(0), $2, $3)) }
+  | ELSE stmt            { Some $2 }
 
 expr_list:
   | expr                 { [$1] }
@@ -50,7 +61,6 @@ expr:
   | IDENTIFIER           { Var($1) }
   | expr PLUS expr       { Add($1, $3) }
   | expr MINUS expr      { Sub($1, $3) }
-  | LPAREN expr RPAREN   { $2 }
 
 relop:
   | GT                   { Greater }
