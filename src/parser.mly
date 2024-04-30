@@ -19,15 +19,18 @@ open Ast
 %token LT
 %token PLUS
 %token MINUS
+%token COMMA
+%token EOF
 
-%start <Ast.stmt list> program
-%type <Ast.expr> expr
-%type <Ast.stmt> stmt
-%type <Ast.stmt list> stmt_list
-%type <Ast.relop> relop
-%type <Ast.expr list> expr_list
-%type <Ast.stmt option> opt_else
-%type <Ast.string list> var_list
+%start program
+%type <ast.stmt list> program
+%type <ast.expr> expr
+%type <ast.stmt> stmt
+%type <ast.stmt list> stmt_list
+%type <ast.relop> relop
+%type <ast.expr list> expr_list
+%type <ast.stmt option> opt_else
+%type <ast.string list> var_list
 
 %%
 program:
